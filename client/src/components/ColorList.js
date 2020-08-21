@@ -7,8 +7,8 @@ const initialColor = {
   code: { hex: "" }
 };
 
+
 const ColorList = ({ colors, updateColors }) => {
-  const history = useHistory()
 
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -31,7 +31,7 @@ const ColorList = ({ colors, updateColors }) => {
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
-    history.push(`/bubbles/${color.id}`)
+    // history.pushState(`/bubbles/${color.id}`)
   };
 
 
@@ -46,7 +46,6 @@ const ColorList = ({ colors, updateColors }) => {
       update()
     } catch (error) {
       console.log(colorToEdit.id)
-
     }
   };
 
@@ -66,7 +65,7 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li data-testid='bubble' key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {
                 e.stopPropagation();
