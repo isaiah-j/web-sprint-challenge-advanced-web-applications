@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../auth/axiosWithAuth";
+import { useHistory } from 'react-router-dom'
 
 const initialColor = {
   color: "",
@@ -7,9 +8,14 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  const history = useHistory()
+
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+
+  useEffect(() => {
+    console.log(colorToEdit)
+  }, [colorToEdit])
 
   const update = async () => {
     try {
@@ -25,13 +31,23 @@ const ColorList = ({ colors, updateColors }) => {
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    history.push(`/bubbles/${color.id}`)
   };
 
-  const saveEdit = e => {
+
+
+  const saveEdit = async e => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    try {
+      await axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      update()
+    } catch (error) {
+      console.log(colorToEdit.id)
+
+    }
   };
 
   const deleteColor = async (color) => {
