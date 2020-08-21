@@ -14,7 +14,7 @@ test("Fetches data and renders the bubbles", () => {
   const { rerender } = render(<BubblePage />)
 
   const { getAllByTestId } = render(<Bubbles colors={mockColorsData.data} />)
-  
+
   const bubbles = getAllByTestId(/bubble/i)
   expect(bubbles).toHaveLength(2)
 });

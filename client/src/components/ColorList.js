@@ -34,8 +34,6 @@ const ColorList = ({ colors, updateColors }) => {
     // history.pushState(`/bubbles/${color.id}`)
   };
 
-
-
   const saveEdit = async e => {
     e.preventDefault();
     // Make a put request to save your updated color

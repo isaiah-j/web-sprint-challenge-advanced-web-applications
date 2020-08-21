@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import addColor from './components/add-color/addColor'
 import Login from "./components/login/Login";
 import "./styles.scss";
 import BubblePage from './components/BubblePage'
@@ -12,6 +12,7 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Login} />
         <PrivateRoute path='/bubbles' component={BubblePage}></PrivateRoute>
+        <PrivateRoute path='/add-color' component={addColor}></PrivateRoute>
 
         {/* 
           Build a PrivateRoute component that will 
